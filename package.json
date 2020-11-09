@@ -1,0 +1,19 @@
+{
+  "name": "flexiabode",
+  "version": "1.0.0",
+  "description": "mini project for posting and selling property",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "flexiabode",
+    "miniproject",
+    "ecommerce"
+  ],
+  "author": "dev3872",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
