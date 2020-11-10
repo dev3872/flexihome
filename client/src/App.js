@@ -1,10 +1,11 @@
 import React from 'react'
+import NavigationBar from "./components/NavigationBar";
 
 function App() {
   return (
-    <div>
-      Landing Page
-    </div>
+      <>
+      <NavigationBar/>
+      </>
   )
 }
 
