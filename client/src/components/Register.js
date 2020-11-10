@@ -8,11 +8,18 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import PropTypes from "prop-types";
+import Axios from "axios";
 
 function Register(props) {
   const { onClose, open } = props;
   const handleClose = () => {
     onClose();
+  };
+  const handleFinalClose = () => {
+    onClose();
+    Axios.get("/api/users/").then((res) => {
+      console.log(res.data.data);
+    });
   };
 
   return (
@@ -34,6 +41,22 @@ function Register(props) {
         <TextField
           autoFocus
           margin="dense"
+          id="name"
+          label="Name"
+          type="text"
+          fullWidth
+        />
+        <TextField
+          autoFocus
+          margin="dense"
+          id="phone"
+          label="Phone"
+          type="tel"
+          fullWidth
+        />
+        <TextField
+          autoFocus
+          margin="dense"
           id="password"
           label="Password"
           type="password"
@@ -44,7 +67,7 @@ function Register(props) {
         <Button onClick={handleClose} color="primary">
           Cancel
         </Button>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleFinalClose} color="primary">
           Register
         </Button>
       </DialogActions>

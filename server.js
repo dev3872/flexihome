@@ -1,11 +1,18 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const connectDB = require("./config/db");
-
-connectDB();
-
+const users = require("./routes/api/users");
 const port = 4000;
 const app = express();
+
+//connect Database
+connectDB();
+
+// Init Middleware
+app.use(express.json());
+
+// Define Routes
+app.use("/api/users", users);
 
 app.get("/", (req, res) => {
   res.json({
