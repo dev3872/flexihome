@@ -3,23 +3,63 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
+  DialogContentText,
   DialogTitle,
+  makeStyles,
   TextField,
+  Typography,
 } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Axios from "axios";
 
 function Register(props) {
-  const { onClose, open } = props;
+  const { onClose, open, onLoginOpen } = props;
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const useStyles = makeStyles({
+    root: {
+      width: "100%",
+      maxWidth: 500,
+    },
+  });
+  const classes = useStyles();
+
   const handleClose = () => {
     onClose();
   };
-  const handleFinalClose = () => {
+  const switchLogin = () => {
     onClose();
-    Axios.get("/api/users/").then((res) => {
-      console.log(res.data.data);
-    });
+    onLoginOpen();
+  };
+  const handleFinalClose = () => {
+    Axios.post("/api/users/", {
+      name: name,
+      email: email,
+      password: password,
+    })
+      .then((res) => {
+        console.log(res);
+        onClose();
+      })
+      .catch((err) => {
+        const errors = err.response.data.errors;
+        if (errors.length > 0) {
+          for (let index = 0; index < errors.length; index++) {
+            if (errors[index].param === "name") {
+              setNameError(errors[index].msg);
+            } else if (errors[index].param === "email") {
+              setEmailError(errors[index].msg);
+            } else if (errors[index].param === "password") {
+              setPasswordError(errors[index].msg);
+            }
+          }
+        }
+      });
   };
 
   return (
@@ -34,32 +74,39 @@ function Register(props) {
           autoFocus
           margin="dense"
           id="email"
-          label="Email Address"
+          error={emailError === "" ? false : true}
+          label={emailError === "" ? "Email Address" : emailError}
           type="email"
+          onChange={(event) => {
+            setEmail(event.target.value);
+            setEmailError("");
+          }}
           fullWidth
         />
         <TextField
           autoFocus
           margin="dense"
           id="name"
-          label="Name"
+          error={nameError === "" ? false : true}
+          label={nameError === "" ? "Name" : nameError}
           type="text"
-          fullWidth
-        />
-        <TextField
-          autoFocus
-          margin="dense"
-          id="phone"
-          label="Phone"
-          type="tel"
+          onChange={(event) => {
+            setName(event.target.value);
+            setNameError("");
+          }}
           fullWidth
         />
         <TextField
           autoFocus
           margin="dense"
           id="password"
-          label="Password"
+          error={passwordError === "" ? false : true}
+          label={passwordError === "" ? "Password" : passwordError}
           type="password"
+          onChange={(event) => {
+            setPassword(event.target.value);
+            setPasswordError("");
+          }}
           fullWidth
         />
       </DialogContent>
@@ -71,6 +118,15 @@ function Register(props) {
           Register
         </Button>
       </DialogActions>
+      <DialogContent>
+        <DialogContentText>
+          <div className={classes.root} onClick={switchLogin}>
+            <Typography variant="subtitle1" gutterBottom>
+              Already registered? <b>Login</b>
+            </Typography>
+          </div>
+        </DialogContentText>
+      </DialogContent>
     </Dialog>
   );
 }
@@ -78,6 +134,7 @@ function Register(props) {
 Register.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
+  onLoginOpen: PropTypes.func.isRequired,
 };
 
 export default Register;

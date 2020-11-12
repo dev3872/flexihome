@@ -154,9 +154,19 @@ function NavigationBar() {
           </Toolbar>
         </AppBar>
       </div>
-      {loginState && <Login open={loginState} onClose={handleLoginClose} />}
+      {loginState && (
+        <Login
+          open={loginState}
+          onClose={handleLoginClose}
+          onRegisterOpen={handleRegisterOpen}
+        />
+      )}
       {registerState && (
-        <Register open={registerState} onClose={handleRegisterClose} />
+        <Register
+          open={registerState}
+          onClose={handleRegisterClose}
+          onLoginOpen={handleLoginOpen}
+        />
       )}
     </>
   );

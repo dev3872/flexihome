@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const connectDB = require("./config/db");
 const users = require("./routes/api/users");
+const auth = require("./routes/api/auth");
 const port = 4000;
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 
 // Define Routes
 app.use("/api/users", users);
+app.use("/api/auth", auth);
 
 app.get("/", (req, res) => {
   res.json({
