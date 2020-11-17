@@ -1,0 +1,15 @@
+export const SET_ALERT = "SET_ALERT";
+export const REMOVE_ALERT = "REMOVE_ALERT";
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_FAIL = "REGISTER_FAIL";
+export const USER_LOADED = "USER_LOADED";
+export const AUTH_ERROR = "AUTH_ERROR";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAIL = "LOGIN_FAIL";
+export const LOGOUT = "LOGOUT";
+export const ACCOUNT_DELETED = "ACCOUNT_DELETED";
+export const REGISTER_MODAL = "REGISTER_MODAL";
+export const LOGIN_MODAL = "LOGIN_MODAL";
+export const LOGIN_ERROR = "LOGIN_ERROR";
+export const REGISTER_ERROR = "REGISTER_ERROR";
+export const RESET_ERROR = "RESET_ERROR";

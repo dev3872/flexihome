@@ -13,9 +13,13 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Divider } from "@material-ui/core";
-import Register from "./Register";
-import Login from "./Login";
-
+import { loginModal, registerModal } from "../../actions/modal";
+import Login from "../auth/Login";
+import Register from "../auth/Register";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logout } from "../../actions/auth";
+import Spinner from "./Spinner";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -31,10 +35,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NavigationBar() {
-  const [auth, setAuth] = React.useState(true);
-  const [registerState, setRegisterState] = useState(false);
-  const [loginState, setLoginState] = useState(false);
+const NavigationBar = ({
+  loginModal,
+  registerModal,
+  isAuthenticated,
+  loginOpen,
+  registerOpen,
+  logout,
+  user,
+  isLoading,
+}) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [openState, setOpenState] = useState(false);
   const open = Boolean(anchorEl);
@@ -57,21 +67,6 @@ function NavigationBar() {
 
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
-  const handleRegisterOpen = () => {
-    setAnchorEl(null);
-    setRegisterState(true);
-  };
-  const handleLoginOpen = () => {
-    setAnchorEl(null);
-    setLoginState(true);
-  };
-  const handleRegisterClose = () => {
-    setRegisterState(false);
-  };
-  const handleLoginClose = () => {
-    setLoginState(false);
   };
 
   const list = (
@@ -119,7 +114,48 @@ function NavigationBar() {
             <Typography variant="h6" className={classes.title}>
               FlexiAbode
             </Typography>
-            {auth && (
+            {isLoading ? <Spinner /> : ""}
+            {isAuthenticated ? (
+              <div>
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                  {user ? user.name : ""}
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={open}
+                  onClose={handleClose}
+                >
+                  <MenuItem>Profile</MenuItem>
+
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      logout();
+                    }}
+                  >
+                    Logout
+                  </MenuItem>
+                  {loginOpen && <Login />}
+                  {registerOpen && <Register />}
+                </Menu>
+              </div>
+            ) : (
               <div>
                 <IconButton
                   aria-label="account of current user"
@@ -145,30 +181,53 @@ function NavigationBar() {
                   open={open}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleRegisterOpen}>Register</MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      registerModal();
+                    }}
+                  >
+                    Register
+                  </MenuItem>
 
-                  <MenuItem onClick={handleLoginOpen}>Login</MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      loginModal();
+                    }}
+                  >
+                    Login
+                  </MenuItem>
+                  {loginOpen && <Login />}
+                  {registerOpen && <Register />}
                 </Menu>
               </div>
             )}
           </Toolbar>
         </AppBar>
       </div>
-      {loginState && (
-        <Login
-          open={loginState}
-          onClose={handleLoginClose}
-          onRegisterOpen={handleRegisterOpen}
-        />
-      )}
-      {registerState && (
-        <Register
-          open={registerState}
-          onClose={handleRegisterClose}
-          onLoginOpen={handleLoginOpen}
-        />
-      )}
     </>
   );
-}
-export default NavigationBar;
+};
+Register.propTypes = {
+  loginModal: PropTypes.func.isRequired,
+  registerModal: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+  user: PropTypes.object,
+  loginOpen: PropTypes.bool,
+  registerOpen: PropTypes.bool,
+  isLoading: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  loginOpen: state.modal.login_open,
+  registerOpen: state.modal.register_open,
+  user: state.auth.user,
+  isLoading: state.auth.isLoading,
+});
+
+export default connect(mapStateToProps, { loginModal, registerModal, logout })(
+  NavigationBar
+);
