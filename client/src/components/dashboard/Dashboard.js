@@ -1,14 +1,8 @@
 import React, { Fragment } from "react";
+import PostProperty from "../post-property/PostProperty";
 
 const Dashboard = () => {
-  return (
-    <Fragment>
-      <h1 className="large text-primary">Dashboard</h1>
-      <p className="lead">
-        <i className="fas fa-user" /> Welcome
-      </p>
-    </Fragment>
-  );
+  return <PostProperty />;
 };
 
 export default Dashboard;

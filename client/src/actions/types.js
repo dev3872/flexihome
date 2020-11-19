@@ -13,3 +13,5 @@ export const LOGIN_MODAL = "LOGIN_MODAL";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const REGISTER_ERROR = "REGISTER_ERROR";
 export const RESET_ERROR = "RESET_ERROR";
+export const WHO_ARE_YOU = "WHO_ARE_YOU";
+export const LISTING_PROPERTY_FOR = "LISTING_PROPERTY_FOR";
