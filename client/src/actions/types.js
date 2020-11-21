@@ -15,3 +15,4 @@ export const REGISTER_ERROR = "REGISTER_ERROR";
 export const RESET_ERROR = "RESET_ERROR";
 export const WHO_ARE_YOU = "WHO_ARE_YOU";
 export const LISTING_PROPERTY_FOR = "LISTING_PROPERTY_FOR";
+export const PROPERTY_TYPE = "PROPERTY_TYPE";

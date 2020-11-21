@@ -1,4 +1,4 @@
-import { WHO_ARE_YOU, LISTING_PROPERTY_FOR } from "./types";
+import { WHO_ARE_YOU, LISTING_PROPERTY_FOR, PROPERTY_TYPE } from "./types";
 
 // set user type
 export const setUser = (user) => async (dispatch) => {
@@ -13,6 +13,15 @@ export const setUser = (user) => async (dispatch) => {
 export const setListingProperty = (data) => async (dispatch) => {
   dispatch({
     type: LISTING_PROPERTY_FOR,
+    payload: data,
+  });
+};
+
+//Set property type and property sub type
+
+export const setPropertyType = (data) => async (dispatch) => {
+  dispatch({
+    type: PROPERTY_TYPE,
     payload: data,
   });
 };

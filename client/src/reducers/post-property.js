@@ -1,7 +1,15 @@
-import { WHO_ARE_YOU, LISTING_PROPERTY_FOR } from "../actions/types";
+import {
+  WHO_ARE_YOU,
+  LISTING_PROPERTY_FOR,
+  PROPERTY_TYPE,
+} from "../actions/types";
 const initialState = {
   user: "",
   listingPropertyFor: {},
+  propertyType: {
+    propertyType: "",
+    propertySubType: "",
+  },
 };
 export default function (state = initialState, action) {
   const { type, payload } = action;
@@ -16,6 +24,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         listingPropertyFor: payload,
+      };
+
+    case PROPERTY_TYPE:
+      return {
+        ...state,
+        propertyType: payload,
       };
 
     default:

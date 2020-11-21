@@ -10,6 +10,7 @@ import { Grid } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ListingPropertyFor from "./ListingPropertyFor";
+import ApartmentType from "./ApartmentType";
 
 const Steps = ({ postProperty }) => {
   const [activeStep, setActiveStep] = useState(0);
@@ -34,7 +35,8 @@ const Steps = ({ postProperty }) => {
     if (
       (activeStep === 0 && postProperty.user !== "") ||
       (activeStep === 1 &&
-        Object.keys(postProperty.listingPropertyFor).length > 0)
+        Object.keys(postProperty.listingPropertyFor).length > 0) ||
+      (activeStep === 2 && postProperty.propertyType.propertySubType !== "")
     ) {
       setValidForward(true);
     } else {
@@ -44,6 +46,7 @@ const Steps = ({ postProperty }) => {
     activeStep,
     postProperty.user,
     postProperty.listingPropertyFor.listingFor,
+    postProperty.propertyType.propertySubType,
   ]);
   const classes = useStyles();
   const getSteps = () => [
@@ -66,7 +69,7 @@ const Steps = ({ postProperty }) => {
       case 1:
         return <ListingPropertyFor />;
       case 2:
-        return "This is the bit I really care about!";
+        return <ApartmentType />;
       default:
         return "Unknown step";
     }
