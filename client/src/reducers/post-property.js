@@ -2,6 +2,7 @@ import {
   WHO_ARE_YOU,
   LISTING_PROPERTY_FOR,
   PROPERTY_TYPE,
+  LOCATION_DETAILS,
 } from "../actions/types";
 const initialState = {
   user: "",
@@ -9,6 +10,14 @@ const initialState = {
   propertyType: {
     propertyType: "",
     propertySubType: "",
+  },
+  locationDetails: {
+    defState: "",
+    defCity: "",
+    projectName: "",
+    address: "",
+    locality: "",
+    pincode: "",
   },
 };
 export default function (state = initialState, action) {
@@ -30,6 +39,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         propertyType: payload,
+      };
+    case LOCATION_DETAILS:
+      return {
+        ...state,
+        locationDetails: payload,
       };
 
     default:

@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ListingPropertyFor from "./ListingPropertyFor";
 import ApartmentType from "./ApartmentType";
+import LocationDetails from "./LocationDetails";
 
 const Steps = ({ postProperty }) => {
   const [activeStep, setActiveStep] = useState(0);
@@ -36,7 +37,8 @@ const Steps = ({ postProperty }) => {
       (activeStep === 0 && postProperty.user !== "") ||
       (activeStep === 1 &&
         Object.keys(postProperty.listingPropertyFor).length > 0) ||
-      (activeStep === 2 && postProperty.propertyType.propertySubType !== "")
+      (activeStep === 2 && postProperty.propertyType.propertySubType !== "") ||
+      (activeStep === 3 && validateStep3(postProperty.locationDetails))
     ) {
       setValidForward(true);
     } else {
@@ -47,6 +49,12 @@ const Steps = ({ postProperty }) => {
     postProperty.user,
     postProperty.listingPropertyFor.listingFor,
     postProperty.propertyType.propertySubType,
+    postProperty.locationDetails.defState,
+    postProperty.locationDetails.defCity,
+    postProperty.locationDetails.projectName,
+    postProperty.locationDetails.address,
+    postProperty.locationDetails.locality,
+    postProperty.locationDetails.pincode,
   ]);
   const classes = useStyles();
   const getSteps = () => [
@@ -62,6 +70,16 @@ const Steps = ({ postProperty }) => {
     "Submit",
   ];
 
+  const validateStep3 = (locationDetail) => {
+    let flag = true;
+    Object.entries(locationDetail).forEach(([key, value]) => {
+      if (value === "") {
+        flag = false;
+      }
+    });
+    return flag;
+  };
+
   const getStepContent = (step) => {
     switch (step) {
       case 0:
@@ -70,6 +88,8 @@ const Steps = ({ postProperty }) => {
         return <ListingPropertyFor />;
       case 2:
         return <ApartmentType />;
+      case 3:
+        return <LocationDetails />;
       default:
         return "Unknown step";
     }
