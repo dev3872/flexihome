@@ -23,7 +23,7 @@
 			"import PropTypes from 'prop-types'",
 			"import { connect } from 'react-redux'",
 			"",
-			"export const ${1:${TM_FILENAME_BASE}} = () => {",
+			"const ${1:${TM_FILENAME_BASE}} = () => {",
 			"\treturn (",
       		"\t\t<div>",
       		"\t\t\t$0",

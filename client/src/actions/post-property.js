@@ -3,6 +3,7 @@ import {
   LISTING_PROPERTY_FOR,
   PROPERTY_TYPE,
   LOCATION_DETAILS,
+  PROPERTY_DETAILS,
 } from "./types";
 
 // set user type
@@ -36,6 +37,15 @@ export const setPropertyType = (data) => async (dispatch) => {
 export const setLocationDetails = (data) => async (dispatch) => {
   dispatch({
     type: LOCATION_DETAILS,
+    payload: data,
+  });
+};
+
+//set property details
+
+export const setPropertyDetails = (data) => async (dispatch) => {
+  dispatch({
+    type: PROPERTY_DETAILS,
     payload: data,
   });
 };

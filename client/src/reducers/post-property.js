@@ -3,6 +3,7 @@ import {
   LISTING_PROPERTY_FOR,
   PROPERTY_TYPE,
   LOCATION_DETAILS,
+  PROPERTY_DETAILS,
 } from "../actions/types";
 const initialState = {
   user: "",
@@ -18,6 +19,23 @@ const initialState = {
     address: "",
     locality: "",
     pincode: "",
+  },
+  propertyDetails: {
+    superBuiltUpArea: 0,
+    builtUpArea: 0,
+    carpetArea: 0,
+    unit: "",
+    roomCount: {
+      bedrooms: 0,
+      bathrooms: 0,
+      balconies: 0,
+      poojaRoom: 0,
+      studyRoom: 0,
+      serventRoom: 0,
+    },
+    reservedParking: "",
+    parkingCount: 0,
+    constructionCount: 0,
   },
 };
 export default function (state = initialState, action) {
@@ -44,6 +62,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         locationDetails: payload,
+      };
+    case PROPERTY_DETAILS:
+      return {
+        ...state,
+        propertyDetails: payload,
       };
 
     default:

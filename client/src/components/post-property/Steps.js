@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import ListingPropertyFor from "./ListingPropertyFor";
 import ApartmentType from "./ApartmentType";
 import LocationDetails from "./LocationDetails";
+import PropertyDetails from "./PropertyDetails";
 
 const Steps = ({ postProperty }) => {
   const [activeStep, setActiveStep] = useState(0);
@@ -38,7 +39,8 @@ const Steps = ({ postProperty }) => {
       (activeStep === 1 &&
         Object.keys(postProperty.listingPropertyFor).length > 0) ||
       (activeStep === 2 && postProperty.propertyType.propertySubType !== "") ||
-      (activeStep === 3 && validateStep3(postProperty.locationDetails))
+      (activeStep === 3 && validateStep3(postProperty.locationDetails)) ||
+      (activeStep === 4 && postProperty.propertyDetails.unit !== "")
     ) {
       setValidForward(true);
     } else {
@@ -55,6 +57,7 @@ const Steps = ({ postProperty }) => {
     postProperty.locationDetails.address,
     postProperty.locationDetails.locality,
     postProperty.locationDetails.pincode,
+    postProperty.propertyDetails.unit,
   ]);
   const classes = useStyles();
   const getSteps = () => [
@@ -90,6 +93,8 @@ const Steps = ({ postProperty }) => {
         return <ApartmentType />;
       case 3:
         return <LocationDetails />;
+      case 4:
+        return <PropertyDetails />;
       default:
         return "Unknown step";
     }
