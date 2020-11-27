@@ -5,6 +5,7 @@ import {
   LOCATION_DETAILS,
   PROPERTY_DETAILS,
   IMAGE_DETAILS,
+  FURNISHING,
 } from "./types";
 
 // set user type
@@ -56,6 +57,15 @@ export const setPropertyDetails = (data) => async (dispatch) => {
 export const setImageDetails = (data) => async (dispatch) => {
   dispatch({
     type: IMAGE_DETAILS,
+    payload: data,
+  });
+};
+
+//Furnishing
+
+export const setFurnishingList = (data) => async (dispatch) => {
+  dispatch({
+    type: FURNISHING,
     payload: data,
   });
 };
