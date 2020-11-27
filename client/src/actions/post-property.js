@@ -4,6 +4,7 @@ import {
   PROPERTY_TYPE,
   LOCATION_DETAILS,
   PROPERTY_DETAILS,
+  IMAGE_DETAILS,
 } from "./types";
 
 // set user type
@@ -46,6 +47,15 @@ export const setLocationDetails = (data) => async (dispatch) => {
 export const setPropertyDetails = (data) => async (dispatch) => {
   dispatch({
     type: PROPERTY_DETAILS,
+    payload: data,
+  });
+};
+
+//Set Image Details
+
+export const setImageDetails = (data) => async (dispatch) => {
+  dispatch({
+    type: IMAGE_DETAILS,
     payload: data,
   });
 };

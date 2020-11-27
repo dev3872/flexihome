@@ -13,6 +13,7 @@ import ListingPropertyFor from "./ListingPropertyFor";
 import ApartmentType from "./ApartmentType";
 import LocationDetails from "./LocationDetails";
 import PropertyDetails from "./PropertyDetails";
+import Images from "./Images";
 
 const Steps = ({ postProperty }) => {
   const [activeStep, setActiveStep] = useState(0);
@@ -40,7 +41,8 @@ const Steps = ({ postProperty }) => {
         Object.keys(postProperty.listingPropertyFor).length > 0) ||
       (activeStep === 2 && postProperty.propertyType.propertySubType !== "") ||
       (activeStep === 3 && validateStep3(postProperty.locationDetails)) ||
-      (activeStep === 4 && postProperty.propertyDetails.unit !== "")
+      (activeStep === 4 && postProperty.propertyDetails.unit !== "") ||
+      activeStep === 5
     ) {
       setValidForward(true);
     } else {
@@ -95,6 +97,8 @@ const Steps = ({ postProperty }) => {
         return <LocationDetails />;
       case 4:
         return <PropertyDetails />;
+      case 5:
+        return <Images />;
       default:
         return "Unknown step";
     }

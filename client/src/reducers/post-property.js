@@ -4,6 +4,7 @@ import {
   PROPERTY_TYPE,
   LOCATION_DETAILS,
   PROPERTY_DETAILS,
+  IMAGE_DETAILS,
 } from "../actions/types";
 const initialState = {
   user: "",
@@ -37,6 +38,7 @@ const initialState = {
     parkingCount: 0,
     constructionCount: 0,
   },
+  imageDetails: [],
 };
 export default function (state = initialState, action) {
   const { type, payload } = action;
@@ -67,6 +69,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         propertyDetails: payload,
+      };
+    case IMAGE_DETAILS:
+      return {
+        ...state,
+        imageDetails: payload,
       };
 
     default:
