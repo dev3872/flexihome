@@ -6,7 +6,9 @@ import {
   PROPERTY_DETAILS,
   IMAGE_DETAILS,
   FURNISHING,
+  AMENITIES,
 } from "../actions/types";
+import Amenities from "../components/post-property/Amenities";
 const initialState = {
   user: "",
   listingPropertyFor: {},
@@ -41,6 +43,7 @@ const initialState = {
   },
   imageDetails: [],
   furnishing: [],
+  amenities: [],
 };
 export default function (state = initialState, action) {
   const { type, payload } = action;
@@ -81,6 +84,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         furnishing: payload,
+      };
+    case AMENITIES:
+      return {
+        ...state,
+        amenities: payload,
       };
 
     default:
