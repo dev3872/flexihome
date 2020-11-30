@@ -18,8 +18,9 @@ import Furnishing from "./Furnishing";
 import Amenities from "./Amenities";
 import Pricing from "./Pricing";
 import Submit from "./Submit";
+import { submitProperty } from "../../actions/post-property";
 
-const Steps = ({ postProperty }) => {
+const Steps = ({ postProperty, submitProperty }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [validForward, setValidForward] = useState(false);
   const useStyles = makeStyles((theme) => ({
@@ -124,6 +125,9 @@ const Steps = ({ postProperty }) => {
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (activeStep === 9) {
+      submitProperty(postProperty);
+    }
   };
 
   const handleBack = () => {
@@ -183,10 +187,11 @@ const Steps = ({ postProperty }) => {
 
 Steps.propTypes = {
   postProperty: PropTypes.object,
+  submitProperty: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   postProperty: state.postProperty,
 });
 
-export default connect(mapStateToProps, {})(Steps);
+export default connect(mapStateToProps, { submitProperty })(Steps);

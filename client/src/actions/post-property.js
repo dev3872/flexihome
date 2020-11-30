@@ -9,6 +9,7 @@ import {
   AMENITIES,
   PRICING_DETAILS,
 } from "./types";
+import api from "../utils/api";
 
 // set user type
 export const setUser = (user) => async (dispatch) => {
@@ -88,4 +89,9 @@ export const setPricingDetails = (data) => async (dispatch) => {
     type: PRICING_DETAILS,
     payload: data,
   });
+};
+
+export const submitProperty = (data) => async (dispatch) => {
+  const res = await api.post("/postProperty/submit", data);
+  console.log(res);
 };

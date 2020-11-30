@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const connectDB = require("./config/db");
 const users = require("./routes/api/users");
 const auth = require("./routes/api/auth");
+const postProperty = require("./routes/api/post-property");
 const port = 4000;
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 // Define Routes
 app.use("/api/users", users);
 app.use("/api/auth", auth);
+app.use("/api/postProperty", postProperty);
 
 app.get("/", (req, res) => {
   res.json({
