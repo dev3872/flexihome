@@ -16,6 +16,7 @@ import PropertyDetails from "./PropertyDetails";
 import Images from "./Images";
 import Furnishing from "./Furnishing";
 import Amenities from "./Amenities";
+import Pricing from "./Pricing";
 
 const Steps = ({ postProperty }) => {
   const [activeStep, setActiveStep] = useState(0);
@@ -46,7 +47,8 @@ const Steps = ({ postProperty }) => {
       (activeStep === 4 && postProperty.propertyDetails.unit !== "") ||
       activeStep === 5 ||
       activeStep === 6 ||
-      activeStep === 7
+      activeStep === 7 ||
+      activeStep === 8
     ) {
       setValidForward(true);
     } else {
@@ -107,6 +109,10 @@ const Steps = ({ postProperty }) => {
         return <Furnishing />;
       case 7:
         return <Amenities />;
+      case 8:
+        return <Pricing />;
+      case 9:
+        return "Submit Step";
       default:
         return "Unknown step";
     }

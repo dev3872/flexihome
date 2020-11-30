@@ -7,6 +7,7 @@ import {
   IMAGE_DETAILS,
   FURNISHING,
   AMENITIES,
+  PRICING_DETAILS,
 } from "./types";
 
 // set user type
@@ -76,6 +77,15 @@ export const setFurnishingList = (data) => async (dispatch) => {
 export const setAmenitiesList = (data) => async (dispatch) => {
   dispatch({
     type: AMENITIES,
+    payload: data,
+  });
+};
+
+//Set Pricing Details
+
+export const setPricingDetails = (data) => async (dispatch) => {
+  dispatch({
+    type: PRICING_DETAILS,
     payload: data,
   });
 };
