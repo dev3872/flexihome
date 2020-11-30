@@ -39,6 +39,7 @@ const initialState = {
       serventRoom: 0,
     },
     reservedParking: "",
+    propertyOnFloor: "",
     parkingCount: 0,
     constructionCount: 0,
   },
