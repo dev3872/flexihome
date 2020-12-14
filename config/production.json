@@ -1,0 +1,4 @@
+{
+  "jwtSecret": "secret",
+  "mongoURI": "mongodb+srv://dbUser:dbUser@cluster0.aj5zi.mongodb.net/FlexiAbode?retryWrites=true&w=majority"
+}
