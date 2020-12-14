@@ -4,6 +4,7 @@ import auth from "./auth";
 import modal from "./modal";
 import errors from "./errors";
 import postProperty from "./post-property";
+import searchResults from "./search-results";
 
 export default combineReducers({
   alert,
@@ -11,4 +12,5 @@ export default combineReducers({
   modal,
   errors,
   postProperty,
+  searchResults,
 });

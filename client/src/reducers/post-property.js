@@ -9,7 +9,6 @@ import {
   AMENITIES,
   PRICING_DETAILS,
 } from "../actions/types";
-import Amenities from "../components/post-property/Amenities";
 const initialState = {
   user: "",
   listingPropertyFor: {},
