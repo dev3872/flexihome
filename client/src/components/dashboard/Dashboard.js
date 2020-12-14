@@ -1,8 +1,7 @@
 import React, { Fragment } from "react";
-import PostProperty from "../post-property/PostProperty";
 
 const Dashboard = () => {
-  return <PostProperty />;
+  return <div>Dashboard</div>;
 };
 
 export default Dashboard;

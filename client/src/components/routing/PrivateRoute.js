@@ -1,9 +1,10 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import { loginModal } from "../../actions/modal";
+import Snack from "./Snack";
 
 const PrivateRoute = ({
   loginModal,
@@ -19,7 +20,10 @@ const PrivateRoute = ({
       ) : isAuthenticated ? (
         <Component {...props} />
       ) : (
-        loginModal
+        <>
+          <Snack propOpen={true} />
+          <Redirect to="/" />;
+        </>
       )
     }
   />
@@ -27,11 +31,10 @@ const PrivateRoute = ({
 
 PrivateRoute.propTypes = {
   auth: PropTypes.object.isRequired,
-  loginModal: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { loginModal })(PrivateRoute);
+export default connect(mapStateToProps, {})(PrivateRoute);

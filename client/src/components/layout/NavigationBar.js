@@ -20,6 +20,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
 import Spinner from "./Spinner";
+import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -76,14 +77,26 @@ const NavigationBar = ({
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        <ListItem button key="FlexiAbode">
-          <ListItemText primary="FlexiAbode" />
-        </ListItem>
+        <Link to="/">
+          <ListItem button key="FlexiAbode">
+            <ListItemText primary="FlexiAbode" />
+          </ListItem>
+        </Link>
         <Divider />
         {["Post Property", "Search Property", "Help"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
+          <Link
+            to={
+              text === "Post Property"
+                ? "/post-property"
+                : text === "Search Property"
+                ? "search-property"
+                : "help"
+            }
+          >
+            <ListItem button key={text}>
+              <ListItemText primary={text} />
+            </ListItem>
+          </Link>
         ))}
       </List>
     </div>

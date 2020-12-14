@@ -1,7 +1,9 @@
 import React from "react";
+import { PropTypes } from "prop-types";
+import { connect } from "react-redux";
 import Steps from "./Steps";
 
-function PostProperty() {
+function PostProperty({ isAuthenticated }) {
   return (
     <div>
       {/* TODO: STEPPER */}
@@ -20,4 +22,12 @@ function PostProperty() {
   );
 }
 
-export default PostProperty;
+PostProperty.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, {})(PostProperty);
