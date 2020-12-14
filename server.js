@@ -20,12 +20,6 @@ app.use("/api/auth", auth);
 app.use("/api/postProperty", postProperty);
 app.use("/api/searchProperty", searchProperty);
 
-app.get("/", (req, res) => {
-  res.json({
-    Message: "This is working",
-  });
-});
-
 if (process.env.NODE_ENV === "production") {
   // Set static folder
   app.use(express.static("client/build"));
