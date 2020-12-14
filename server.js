@@ -5,6 +5,7 @@ const users = require("./routes/api/users");
 const auth = require("./routes/api/auth");
 const postProperty = require("./routes/api/post-property");
 const searchProperty = require("./routes/api/searchProperty");
+const path = require("path");
 const port = 4000;
 const app = express();
 
