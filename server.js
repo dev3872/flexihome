@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(port, (err) => {
+app.listen(process.env.PORT || port, (err) => {
   if (!err) {
     console.log(`Server started at port ${port}`);
   } else {
