@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const config = require("config");
-const db = config.get(process.env.mongoURI);
+const db =
+  "mongodb+srv://dbUser:dbUser@cluster0.aj5zi.mongodb.net/FlexiAbode?retryWrites=true&w=majority";
 
 const connectDB = async () => {
   try {
